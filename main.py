@@ -2,6 +2,7 @@
 # -*- encoding: utf-8 -*-
 #
 # Server Subscribe Extension for SSRR Client in Python
+# Main Process
 # Copyright (C) 2018 Patrick Young
 #
 # This program is free software: you can redistribute it and/or modify

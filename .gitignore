@@ -170,5 +170,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 user*.py
+user*.json
 config.json
 .idea
