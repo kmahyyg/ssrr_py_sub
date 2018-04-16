@@ -1,16 +1,19 @@
-# SSRR Server Subscribe Extension for Python version
+# SSRR Server Subscribe Extension for Python Client
 
 # Original Version
 
 https://github.com/shadowsocksrr/shadowsocksr/tree/akkariiin/master
 
-Original Version licensed under Apache License 2.0 (More details can be seen [here](http://www.apache.org/licenses/LICENSE-2.0.txt)
+Original Version licensed under Apache License 2.0 (More details can be seen [here](http://www.apache.org/licenses/LICENSE-2.0.txt))
 
 # This Version
 
 All code written by @kmahyyg are licensed under AGPL-3.0 (More details can be seen [here](https://www.gnu.org/licenses/agpl-3.0.txt))
 
 # Polipo Config
+
+Polipo can help you convert your socks5 proxy to a HTTP proxy easily.
+
 ```/etc/polipo/config```
 
 ```
