@@ -1,0 +1,3 @@
+[submodule "shadowsocksr"]
+	path = shadowsocksr
+	url = git@github.com:shadowsocksrr/shadowsocksr.git
