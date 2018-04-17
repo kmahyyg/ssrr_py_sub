@@ -21,7 +21,8 @@
 from getsub import *
 import os
 import json
-
+from ssraddr import *
+from bestchoice import *
 
 def main():
     try:
@@ -35,6 +36,11 @@ def main():
         subconf.close()
     except:
         print("Unknown Error! main.py@main function")
+    subaddrs = loadsubcri()
+    ssrurilst = sub2ssraddrs(subaddrs)
+    ssrconfs = ssr2conf_b64(ssrurilst)
+    cli_conf_samp = ssrconfs[0]
+    bestserver = pcchoose(ssrconfs[1])
 
 
 if __name__ == '__main__':
