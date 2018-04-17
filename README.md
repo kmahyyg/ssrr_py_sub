@@ -1,12 +1,26 @@
-# SSRR Server Subscribe Extension for Python Client
+# SSRR with Server Subscribe with Python3 on Linux
 
-# Original Version
+## Usage
+
+**ATTENTION: THIS PROGRAM USE SOCKET TO TEST SERVER SPEED(BASED ON PING), SO YOU NEED TO RUN IT USING ROOT PERMISSION!**
+
+1. Run ```sudo ./1sttime.sh``` to initialize config and install dependencies.
+2. Fill in your subscribe URL in ```usersub.json``` "suburl". This URL should be provided by your SP.
+3. Run ```sudo ./runclient.sh``` to get config and run SSRR Python client. Please follow the instructions shown on the screen.
+
+## Support Details
+
+The issues submitted to this repo must contains traceback log or error log, unless you want it to be directly closed.
+
+### Useless info
+
+#### Original Version
 
 https://github.com/shadowsocksrr/shadowsocksr/tree/akkariiin/master
 
 Original Version licensed under Apache License 2.0 (More details can be seen [here](http://www.apache.org/licenses/LICENSE-2.0.txt))
 
-# This Version
+#### This Version
 
 All code written by @kmahyyg are licensed under AGPL-3.0 (More details can be seen [here](https://www.gnu.org/licenses/agpl-3.0.txt))
 
