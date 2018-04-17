@@ -168,7 +168,11 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# user
+clientconf.json
 user*.py
 user*.json
 config.json
-clientconf.json
+/shadowsocksr/shadowsocks/clientconf.json

@@ -20,7 +20,7 @@
 from ping3 import ping
 from socket import gethostbyname as dnslookup
 import requests
-
+from time import sleep
 
 speedlist = []
 
@@ -30,9 +30,14 @@ def serverloca(servername):
         serverip = dnslookup(servername)
     except:
         print("DNS Error!")
-        return 1
+        raise ConnectionError
     baseuri = 'http://freeapi.ipip.net/' + serverip
+    sleep(1)
     r = requests.get(baseuri)
+    sleep(1)
+    if r.status_code > 310:
+        print(r.status_code)
+        raise ConnectionError
     serverlocation = r.text
     return serverlocation
 
@@ -40,6 +45,8 @@ def serverloca(servername):
 def pcchoose(serverlst):
     for node in serverlst:
         rtt = ping(node)
+        if rtt == None:
+            rtt = 99999
         speedlist.append(rtt)
     fast_server_rtt = min(speedlist)
     fast_server = speedlist.index(fast_server_rtt)
@@ -47,13 +54,16 @@ def pcchoose(serverlst):
     # must tell user the fastest server hostname
     fast_server_host = serverlst[fast_server]
     locations = serverloca(fast_server_host)
-    print("The Fastest Server is "+ fast_server_host + "@" + locations)
+    print("The Fastest Server is "+ fast_server_host + " @ " + locations)
     choice = input("Correct? (Y/N)")
     if choice == 'N':
         print('\n')
         print("--------Server List--------")
         for i in serverlst:
             print(i)
+            cursvrno = serverlst.index(i)
+            print('Latency: ' + str(speedlist[cursvrno]))
+            print('\n',end='')
         print("--------Server Listed --------")
         print('\n')
         fast_server_host = input("Please Copy&Paste the server you want? ")

@@ -1,1 +1,5 @@
 #!/usr/bin/env bash
+python3 ./main.py
+cp ./clientconf.json ./shadowsocksr/shadowsocks/
+nohup python3 ./shadowsocksr/shadowsocks/local.py -c ./shadowsocksr/shadowsocks/clientconf.json > /dev/null 2>&1 &
+exit 0

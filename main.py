@@ -25,6 +25,15 @@ from ssraddr import *
 from bestchoice import *
 
 def main():
+    # detect whether root or not.
+    # we need root to use socket and send ICMP to test server
+    runningby = os.getuid()
+    if runningby == 0:
+        pass
+    else:
+        print("To use speed check feature, this program must be run as root.")
+        raise PermissionError
+    # default workflow process
     try:
         subconf = open(os.path.expanduser('./usersub.json'), 'r')
         subconf.close()
