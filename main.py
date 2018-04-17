@@ -35,13 +35,23 @@ def main():
         subconf = open(os.path.expanduser('./usersub.json'), 'r')
         subconf.close()
     except:
-        print("Unknown Error! main.py@main function")
+        print("Unknown Error! main.py@before_run test")
     subaddrs = loadsubcri()
     ssrurilst = sub2ssraddrs(subaddrs)
     ssrconfs = ssr2conf_b64(ssrurilst)
     cli_conf_samp = ssrconfs[0]
     bestserver = pcchoose(ssrconfs[1])
-
+    if isinstance(bestserver,int):
+        return print("Unknown Error! main.py@bestserver test")
+    else:
+        pass
+    cli_conf_samp['server'] = bestserver
+    dumpedconf = json.dumps(cli_conf_samp)
+    dumpfile = open(os.path.expanduser('./clientconf.json'),'w')
+    dumpfile.write(dumpedconf)
+    dumpfile.close()
+    print("Server subscribe extension successfully executed!")
+    return 0
 
 if __name__ == '__main__':
     main()

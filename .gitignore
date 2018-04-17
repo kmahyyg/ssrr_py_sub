@@ -171,3 +171,4 @@ venv.bak/
 user*.py
 user*.json
 config.json
+clientconf.json
