@@ -17,3 +17,25 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from getsub import *
+import os
+import json
+
+
+def main():
+    try:
+        subconf = open(os.path.expanduser('./usersub.json'), 'r')
+        subconf.close()
+    except FileNotFoundError:
+        cwdirec = os.getcwd()
+        os.chdir(cwdirec)
+        os.system(os.path.expanduser('./1sttime.sh'))
+        subconf = open(os.path.expanduser('./usersub.json'), 'r')
+        subconf.close()
+    except:
+        print("Unknown Error! main.py@main function")
+
+
+if __name__ == '__main__':
+    main()
