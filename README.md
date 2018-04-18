@@ -4,7 +4,7 @@
 
 **ATTENTION: THIS PROGRAM USE SOCKET TO TEST SERVER SPEED(BASED ON PING), SO YOU NEED TO RUN IT USING ROOT PERMISSION!**
 
-1. Run ```sudo ./1sttime.sh``` to initialize config and install dependencies.
+1. **Only first time** Run ```sudo ./1sttime.sh``` to initialize config and install dependencies.
 2. Fill in your subscribe URL in ```usersub.json``` "suburl". This URL should be provided by your SP.
 3. Run ```sudo ./runclient.sh``` to get config and run SSRR Python client. Please follow the instructions shown on the screen.
 
