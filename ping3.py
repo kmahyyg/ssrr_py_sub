@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Server Subscribe Extension for SSRR Client in Python
 # Copyright (C) 2018 Patrick Young
 #
@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import os
 import sys
 import socket
 import struct
@@ -103,7 +102,7 @@ def send_one_ping(my_socket, dest_addr, ID):
     # Header is type (8), code (8), checksum (16), id (16), sequence (16)
     my_checksum = 0
 
-    # Make a dummy heder with a 0 checksum.
+    # Make a dummy header with a 0 checksum.
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, my_checksum, ID, 1)
     bytesInDouble = struct.calcsize("d")
     data = (192 - bytesInDouble) * "Q"
@@ -168,7 +167,6 @@ def verbose_ping(dest_addr, timeout=4, count=4):
         else:
             delay = delay * 1000
             print("{}ms".format(int(delay)))
-    print
 
 
 if __name__ == '__main__':
