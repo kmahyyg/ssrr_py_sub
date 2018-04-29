@@ -37,7 +37,8 @@ def serverloca(servername):
     sleep(1)
     if r.status_code > 310:
         print(r.status_code)
-        raise ConnectionError
+        serverlocation = 'Unknown'
+        return serverlocation
     serverlocation = r.text
     return serverlocation
 
