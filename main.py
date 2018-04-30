@@ -63,5 +63,15 @@ def main():
     return 0
 
 if __name__ == '__main__':
-    #TODO: Single server version
-    main()
+    askuser = int(input("Single user, Press 1; Server Sub, Press 2"))
+    if askuser == 2:
+        main()
+    elif askuser == 1:
+        cli_conf_samp = singleuser()
+        dumpedconf = json.dumps(cli_conf_samp)
+        dumpfile = open(os.path.expanduser('./clientconf.json'), 'w')
+        dumpfile.write(dumpedconf)
+        dumpfile.close()
+    else:
+        print("Illegal input!")
+        os._exit(20)

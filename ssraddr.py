@@ -80,3 +80,22 @@ def ssr2conf_b64(ssrurilist):
         allnodes.append(singleserver)
     resultall = [sample_nodeconf,allnodes]
     return resultall
+
+def singleuser():
+    asku_passwd = input("Password?")
+    asku_enc = input("Encryption method?")
+    asku_serv = input("Server host?")
+    asku_servport = int(input("Server port?"))
+    asku_proto = input("Protocol?")
+    asku_protopara = input("Protocol Params?")
+    asku_obfs = input("OBFS?")
+    asku_obfsparam = input("OBFS Params?")
+    sample_nodeconf['password'] = asku_passwd
+    sample_nodeconf['method'] = asku_enc
+    sample_nodeconf['server'] = asku_serv
+    sample_nodeconf['server_port'] =asku_servport
+    sample_nodeconf['protocol'] = asku_proto
+    sample_nodeconf['protocol_param'] = asku_protopara
+    sample_nodeconf['obfs'] =asku_obfs
+    sample_nodeconf['obfs_param'] = asku_obfsparam
+    return sample_nodeconf

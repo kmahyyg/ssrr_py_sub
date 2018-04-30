@@ -21,6 +21,7 @@ from ping3 import ping
 from socket import gethostbyname as dnslookup
 import requests
 from time import sleep
+import asyncio
 
 speedlist = []
 
@@ -44,7 +45,19 @@ def serverloca(servername):
 
 
 def pcchoose(serverlst):
-    # TODO: use asyncio ping3 to determine the most fastest server
+    loop = asyncio.get_event_loop()
+    tasklist = []
+    for i in serverlst:
+        tsk = asyncio.ensure_future(ping(i))
+        tasklist.append(tsk)
+    loop.run_until_complete(asyncio.gather(*tasklist))
+    for i in tasklist:
+        rtt = i.result()
+        if isinstance(rtt, float):
+            rtt = rtt * 1000
+        elif rtt == None:
+            rtt = 999999
+        speedlist.append(rtt)
     fast_server_rtt = min(speedlist)
     fast_server = speedlist.index(fast_server_rtt)
     # list.index() only return one item
