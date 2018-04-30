@@ -24,6 +24,17 @@ Original Version licensed under Apache License 2.0 (More details can be seen [he
 
 All code written by @kmahyyg are licensed under AGPL-3.0 (More details can be seen [here](https://www.gnu.org/licenses/agpl-3.0.txt))
 
+And now, I made it great again. Speedtest feature using asyncio ping, Performance is boosted twice.
+
+```bash
+[root@host master /work] # time sudo ./runclient.sh
+sudo ./runclient.sh  0.30s user 0.06s system 0% cpu 40.590 total
+[root@host async_ping3 /work] # time sudo ./runclient.sh
+sudo ./runclient.sh  0.40s user 0.06s system 2% cpu 17.864 total
+```
+
+
+
 # Polipo Config
 
 Polipo can help you convert your socks5 proxy to a HTTP proxy easily.
