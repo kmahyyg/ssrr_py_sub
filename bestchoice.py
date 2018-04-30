@@ -44,11 +44,7 @@ def serverloca(servername):
 
 
 def pcchoose(serverlst):
-    for node in serverlst:
-        rtt = ping(node)
-        if rtt == None:
-            rtt = 99999
-        speedlist.append(rtt)
+    # TODO: use asyncio ping3 to determine the most fastest server
     fast_server_rtt = min(speedlist)
     fast_server = speedlist.index(fast_server_rtt)
     # list.index() only return one item
