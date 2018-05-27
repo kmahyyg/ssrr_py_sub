@@ -1,9 +1,29 @@
 #!/usr/bin/env python3
 """
-TCP Ping Test (defaults to port 80, 10000 packets)
+Upstream: https://github.com/yantisj/tcpping
+Modified by kmahyyg
 
-Usage: ./tcpping.py host [port] [maxCount]
-- Ctrl-C Exits with Results
+Builtin lib: https://docs.python.org/3/library/timeit.html
+
+Use the same license with the upstream.
+Licensed under GNU AGPL v3.
+
+    TCP PING for ssrr_python_cli_subext
+    Copyright (C) 2018 yantisj&kmahyyg
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 """
 
 import sys
@@ -16,35 +36,14 @@ host = None
 port = 80
 
 # Default to 10000 connections max
-maxCount = 10000
+maxCount = 100
 count = 0
 
 ## Inputs
 
-# Required Host
-try:
-    host = sys.argv[1]
-except IndexError:
-    print("Usage: tcpping.py host [port] [maxCount]")
-    sys.exit(1)
+host = input("YYGIPT_REPLACE")
+port = input("YYGIPT_REPLACE")
 
-# Optional Port
-try:
-    port = int(sys.argv[2])
-except ValueError:
-    print("Error: Port Must be Integer:", sys.argv[3])
-    sys.exit(1)
-except IndexError:
-    pass
-
-# Optional maxCount
-try:
-    maxCount = int(sys.argv[3])
-except ValueError:
-    print("Error: Max Count Value Must be Integer", sys.argv[3])
-    sys.exit(1)
-except IndexError:
-    pass
 
 # Pass/Fail counters
 passed = 0
@@ -61,14 +60,11 @@ def getResults():
 
     print("\nTCP Ping Results: Connections (Total/Pass/Fail): [{:}/{:}/{:}] (Failed: {:}%)".format((count), passed, failed, str(lRate)))
 
-def signal_handler(signal, frame):
-    """ Catch Ctrl-C and Exit """
-    getResults()
-    sys.exit(0)
 
-# Register SIGINT Handler
-signal.signal(signal.SIGINT, signal_handler)
-
+# Main process
+#TODO: while to if, related to maxCount.
+#TODO: librarilized
+#TODO: internal properties using class to return callback data
 # Loop while less than max count or until Ctrl-C caught
 while count < maxCount:
 
@@ -92,7 +88,9 @@ while count < maxCount:
         s.connect((host, int(port)))
         s.shutdown(socket.SHUT_RD)
         success = True
-    
+        
+        
+#TODO: Sentry bug collector
     # Connection Timed Out
     except socket.timeout:
         print("Connection timed out!")
