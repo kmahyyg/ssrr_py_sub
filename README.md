@@ -1,5 +1,11 @@
 # SSRR with Server Subscribe with Python3 on Linux
 
+# HELP WANTED
+
+ASYNCIO to optimize performance.
+
+[Contact me](https://t.me/WeLoveZoe)
+
 ## Usage
 
 **ATTENTION: THIS PROGRAM USE SOCKET TO TEST SERVER SPEED(BASED ON PING), SO YOU NEED TO RUN IT USING ROOT PERMISSION!**
@@ -52,4 +58,4 @@ logFile = /var/log/polipo/polipo.log
 
 #### Opensource dependencies acknowledgement
 
-1. Ping3 Originally from [here](https://github.com/kyan001/ping3/blob/master/LICENSE.txt), Licensed under MIT.
+1. TCP PING file named ping3.py is from [here](https://github.com/yantisj/tcpping), Licensed under AGPLv3.
