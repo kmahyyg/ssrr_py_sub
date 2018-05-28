@@ -28,11 +28,14 @@ def main():
     # detect whether root or not.
     # we need root to use socket and send ICMP to test server
     runningby = os.getuid()
-    if runningby == 0:
-        pass
-    else:
+    try:
+        if runningby == 0:
+            pass
+        else:
+            raise PermissionError
+    except PermissionError:
         print("To use speed check feature, this program must be run as root.")
-        raise PermissionError
+        os._exit(127)
     # default workflow process
     try:
         subconf = open(os.path.expanduser('./usersub.json'), 'r')
@@ -49,7 +52,7 @@ def main():
     ssrurilst = sub2ssraddrs(subaddrs)
     ssrconfs = ssr2conf_b64(ssrurilst)
     cli_conf_samp = ssrconfs[0]
-    bestserver = pcchoose(ssrconfs[1])
+    bestserver = pcchoose(ssrconfs[1],ssrconfs[2])
     if isinstance(bestserver,int):
         return print("Unknown Error! main.py@bestserver test")
     else:

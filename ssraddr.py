@@ -78,7 +78,7 @@ def ssr2conf_b64(ssrurilist):
         serverparams = serverparams.split(sep=':')
         singleserver = serverparams[0]
         allnodes.append(singleserver)
-    resultall = [sample_nodeconf,allnodes]
+    resultall = [sample_nodeconf,allnodes,sample_nodeconf['server_port']]
     return resultall
 
 def singleuser():

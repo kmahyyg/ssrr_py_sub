@@ -17,11 +17,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from ping3 import ping
+from ping3 import tcplatency
 from socket import gethostbyname as dnslookup
 import requests
 from time import sleep
-import asyncio
 
 speedlist = []
 
@@ -44,20 +43,16 @@ def serverloca(servername):
     return serverlocation
 
 
-def pcchoose(serverlst):
-    loop = asyncio.get_event_loop()
-    tasklist = []
+def pcchoose(serverlst,serverport):
+    speedlist = []
     for i in serverlst:
-        tsk = asyncio.ensure_future(ping(i))
-        tasklist.append(tsk)
-    loop.run_until_complete(asyncio.gather(*tasklist))
-    for i in tasklist:
-        rtt = i.result()
-        if isinstance(rtt, float):
-            rtt = rtt * 1000
-        elif rtt == None:
-            rtt = 999999
-        speedlist.append(rtt)
+        tsk = tcplatency(i,int(serverport))
+        speedlist.append(tsk.gettime())
+    for k in speedlist:
+        if int(k) > 350:
+            tmploca = speedlist.index(k)
+            del serverlst[tmploca]
+            del speedlist[tmploca]
     fast_server_rtt = min(speedlist)
     fast_server = speedlist.index(fast_server_rtt)
     # list.index() only return one item
