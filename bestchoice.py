@@ -66,7 +66,7 @@ def pcchoose(serverlst):
     locations = serverloca(fast_server_host)
     print("The Fastest Server is "+ fast_server_host + " @ " + locations)
     choice = input("Correct? (Y/N)")
-    if choice == 'N':
+    if choice.lower() == 'n':
         print('\n')
         print("--------Server List--------")
         for i in serverlst:
@@ -78,7 +78,7 @@ def pcchoose(serverlst):
         print('\n')
         fast_server_host = input("Please Copy&Paste the server you want? ")
         return fast_server_host
-    elif choice == 'Y':
+    elif choice.lower() == 'n':
         return fast_server_host
     else:
         print("Illegal input!")

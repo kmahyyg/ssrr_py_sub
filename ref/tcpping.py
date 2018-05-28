@@ -26,90 +26,80 @@ Licensed under GNU AGPL v3.
 
 """
 
-import sys
 import socket
 import time
-import signal
 from timeit import default_timer as timer
 
-host = None
-port = 80
+# Loop while less than max count
+# Inputs: host and port vars
 
-# Default to 10000 connections max
-maxCount = 100
-count = 0
+class tcplatency(object):
+    def __init__(self, host, port=543, debug=False):
+        self.host = host
+        self.port = port
+        self.__time = 9999.00
+        self.debug = debug
 
-## Inputs
+    def tcpping(self):
+        # Recore latency using a list
+        ping_latency = []
+        # Default to 3 TCP PING packets max
+        maxCount = 3
+        count = 0
+        # Pass/Fail counters
+        passed = 0
+        failed = 0
+        while count < maxCount:
+            # Increment Counter
+            count += 1
+            success = False
+            # New Socket
+            s = socket.socket(
+                socket.AF_INET, socket.SOCK_STREAM)
+            # 1sec Timeout
+            s.settimeout(1)
+            # Start a timer
+            s_start = timer()
+            # Try to Connect
+            try:
+                s.connect((self.host, int(self.port)))
+                s.shutdown(socket.SHUT_RD)
+                success = True
+            # Connection Timed Out
+            except socket.timeout:
+                print("Connection timed out!")
+                failed += 1
+            except OSError as e:
+                print("OS Error:", e)
+                failed += 1
+            # Stop Timer
+            s_stop = timer()
+            s_runtime = "%.2f" % (1000 * (s_stop - s_start))
+            if success:
+                ping_latency.append(float(s_runtime))
+                passed += 1
+            else:
+                ping_latency.append(float(999.00))
+                failed +=1
+            # Sleep for 1sec
+            if count < maxCount:
+                time.sleep(1)
+        if self.debug == True:
+            self.__alltime = ping_latency
+        avg_timeout = 0.00
+        for i in ping_latency:
+            avg_timeout += i
+        avg_timeout = avg_timeout / 3.00
+        self.__time = avg_timeout
 
-host = input("YYGIPT_REPLACE")
-port = input("YYGIPT_REPLACE")
+    def gettime(self):
+        if self.__time == 9999.00:
+            print("Latency is not tested before, auto-perform a test now.")
+            self.tcpping()
+        return self.__time
 
-
-# Pass/Fail counters
-passed = 0
-failed = 0
-
-
-def getResults():
-    """ Summarize Results """
-
-    lRate = 0
-    if failed != 0:
-        lRate = failed / (count) * 100
-        lRate = "%.2f" % lRate
-
-    print("\nTCP Ping Results: Connections (Total/Pass/Fail): [{:}/{:}/{:}] (Failed: {:}%)".format((count), passed, failed, str(lRate)))
-
-
-# Main process
-#TODO: while to if, related to maxCount.
-#TODO: librarilized
-#TODO: internal properties using class to return callback data
-# Loop while less than max count or until Ctrl-C caught
-while count < maxCount:
-
-    # Increment Counter
-    count += 1
-
-    success = False
-
-    # New Socket
-    s = socket.socket(
-    socket.AF_INET, socket.SOCK_STREAM)
-
-    # 1sec Timeout
-    s.settimeout(1)
-
-    # Start a timer
-    s_start = timer()
-
-    # Try to Connect
-    try:
-        s.connect((host, int(port)))
-        s.shutdown(socket.SHUT_RD)
-        success = True
-        
-        
-#TODO: Sentry bug collector
-    # Connection Timed Out
-    except socket.timeout:
-        print("Connection timed out!")
-        failed += 1
-    except OSError as e:
-        print("OS Error:", e)
-        failed += 1
-
-    # Stop Timer
-    s_stop = timer()
-    s_runtime = "%.2f" % (1000 * (s_stop - s_start))
-
-    if success:
-        print("Connected to %s[%s]: tcp_seq=%s time=%s ms" % (host, port, (count-1), s_runtime))
-        passed += 1
-
-    # Sleep for 1sec
-    if count < maxCount:
-        time.sleep(1)
-
-# Output Results if maxCount reached
-getResults()
+    def getdbginfo(self):
+        try:
+            return self.__alltime
+        except AttributeError:
+            print("Debuggable: False!")
