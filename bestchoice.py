@@ -73,7 +73,7 @@ def pcchoose(serverlst,serverport):
         print('\n')
         fast_server_host = input("Please Copy&Paste the server you want? ")
         return fast_server_host
-    elif choice.lower() == 'n':
+    elif choice.lower() == 'y':
         return fast_server_host
     else:
         print("Illegal input!")
