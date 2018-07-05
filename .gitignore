@@ -176,3 +176,4 @@ user*.py
 user*.json
 config.json
 /shadowsocksr/shadowsocks/clientconf.json
+.idea

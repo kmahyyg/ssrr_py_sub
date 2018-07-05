@@ -68,8 +68,14 @@ def ssr2conf_b64(ssrurilist):
     sample_nodeconf['protocol'] = serverparams[2]
     sample_nodeconf['obfs'] = serverparams[4]
     uri_node_query = parse_qs(uri_node.query)
-    sample_nodeconf['obfs_param'] = decode_base64(uri_node_query['obfsparam'][0].encode()).decode()
-    sample_nodeconf['protocol_param'] = decode_base64(uri_node_query['protoparam'][0].encode()).decode()
+    try:
+        sample_nodeconf['obfs_param'] = decode_base64(uri_node_query['obfsparam'][0].encode()).decode()
+    except KeyError:
+        sample_nodeconf['obfs_param'] = ''
+    try:
+        sample_nodeconf['protocol_param'] = decode_base64(uri_node_query['protoparam'][0].encode()).decode()
+    except KeyError:
+        sample_nodeconf['protocol_param'] = ''
     # all servers listed
     for node in newssrurilst:
         node = node.decode()
