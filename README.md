@@ -53,3 +53,4 @@ logFile = /var/log/polipo/polipo.log
 #### Opensource dependencies acknowledgement
 
 1. Ping3 Originally from [here](https://github.com/kyan001/ping3/blob/master/LICENSE.txt), Licensed under MIT.
+2. aioping Originally from [here](https://github.com/stellarbit/aioping), Licensed under GPL V2.
