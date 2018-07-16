@@ -44,7 +44,7 @@ def serverloca(servername):
     return serverlocation
 
 
-def pcchoose(serverlst):
+def pcchoose(serverlst,serverremarklst):
     loop = asyncio.get_event_loop()
     tasklist = []
     for i in serverlst:
@@ -70,8 +70,9 @@ def pcchoose(serverlst):
         print('\n')
         print("--------Server List--------")
         for i in serverlst:
-            print(i)
             cursvrno = serverlst.index(i)
+            print(i,end='')
+            print(" @ " + serverremarklst[cursvrno])
             print('Latency: ' + str(speedlist[cursvrno]))
             print('\n',end='')
         print("--------Server Listed --------")

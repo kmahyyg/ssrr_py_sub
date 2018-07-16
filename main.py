@@ -49,7 +49,7 @@ def main():
     ssrurilst = sub2ssraddrs(subaddrs)
     ssrconfs = ssr2conf_b64(ssrurilst)
     cli_conf_samp = ssrconfs[0]
-    bestserver = pcchoose(ssrconfs[1])
+    bestserver = pcchoose(ssrconfs[1],ssrconfs[2])
     if isinstance(bestserver,int):
         return print("Unknown Error! main.py@bestserver test")
     else:

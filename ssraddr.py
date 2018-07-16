@@ -39,9 +39,11 @@ sample_nodeconf = \
         "local_address": "0.0.0.0",
         "method": None,
         "obfs_param": None,
-        "server": None
+        "server": None,
+        "remarks": None
     }
 
+#['remarks'] = decode_base64(uri_node_query['remarks'][0].encode()).decode()
 
 def ssr2conf_b64(ssrurilist):
     newssrurilst = []
@@ -51,6 +53,23 @@ def ssr2conf_b64(ssrurilist):
         i = decode_base64(i)
         newssrurilst.append(i)
         # return elements in bytes
+    # remarks saved here
+    node_remarks = []
+    for i in newssrurilst:
+        i = i.decode()
+        spl_symbol = i.find('/?')
+        if spl_symbol == '-1':
+            raise NotImplementedError
+        serverparams = i[:spl_symbol]
+        serverparams = serverparams.split(sep=':')
+        urileft = i[spl_symbol:]
+        uriparams_b64 = 'http://127.0.0.1' + urileft
+        uri_node = urlsplit(uriparams_b64)
+        uri_node_query = parse_qs(uri_node.query)
+        try:
+            node_remarks.append(decode_base64(uri_node_query['remarks'][0].encode()).decode())
+        except:
+            pass
     # choose the first node to develop useless params
     spe1node = newssrurilst[0]
     spe1node = spe1node.decode()
@@ -84,7 +103,7 @@ def ssr2conf_b64(ssrurilist):
         serverparams = serverparams.split(sep=':')
         singleserver = serverparams[0]
         allnodes.append(singleserver)
-    resultall = [sample_nodeconf,allnodes]
+    resultall = [sample_nodeconf,allnodes,node_remarks]
     return resultall
 
 def singleuser():
