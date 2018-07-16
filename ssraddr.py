@@ -69,7 +69,7 @@ def ssr2conf_b64(ssrurilist):
         try:
             node_remarks.append(decode_base64(uri_node_query['remarks'][0].encode()).decode())
         except:
-            pass
+            node_remarks.append('NULL')
     # choose the first node to develop useless params
     spe1node = newssrurilst[0]
     spe1node = spe1node.decode()
