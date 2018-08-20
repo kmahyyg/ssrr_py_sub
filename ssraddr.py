@@ -71,7 +71,12 @@ def ssr2conf_b64(ssrurilist):
         except:
             node_remarks.append('NULL')
     # choose the first node to develop useless params
-    spe1node = newssrurilst[0]
+    node_no = 6
+    try:
+        spe1node = newssrurilst[node_no]
+    except IndexError as e:
+        node_no -=2
+        spe1node = newssrurilst[node_no]
     spe1node = spe1node.decode()
     spl_symbol = spe1node.find('/?')
     if spl_symbol == '-1':
@@ -86,7 +91,7 @@ def ssr2conf_b64(ssrurilist):
     try:
         sample_nodeconf['password'] = decode_base64(serverparams[5].encode()).decode()
     except UnicodeDecodeError as e:
-        print("Error" + str(e) + "May caused by using NimaQu's SSPanel Node Remark lefting feature. Ignored this node.")
+        print("Error " + str(e) + " may caused by using NimaQu's SSPanel Node Remark lefting feature. Ignored this node.")
         sample_nodeconf['password'] = "123456"
     sample_nodeconf['protocol'] = serverparams[2]
     sample_nodeconf['obfs'] = serverparams[4]

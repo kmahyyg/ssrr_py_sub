@@ -1,5 +1,7 @@
 # SSRR with Server Subscribe with Python3 on Linux
 
+**Default will parse the No.7 / No.5 Node for password and others credentials**
+
 ## Usage
 
 **ATTENTION: THIS PROGRAM USE SOCKET TO TEST SERVER SPEED(BASED ON PING), SO YOU NEED TO RUN IT USING ROOT PERMISSION!**
