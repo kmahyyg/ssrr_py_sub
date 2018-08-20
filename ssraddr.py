@@ -81,12 +81,15 @@ def ssr2conf_b64(ssrurilist):
     urileft = spe1node[spl_symbol:]
     uriparams_b64 = 'http://127.0.0.1' + urileft
     uri_node = urlsplit(uriparams_b64)
-    sample_nodeconf['server_port'] = serverparams[1]
-    sample_nodeconf['method'] = serverparams[3]
-    sample_nodeconf['password'] = decode_base64(serverparams[5].encode()).decode()
-    sample_nodeconf['protocol'] = serverparams[2]
-    sample_nodeconf['obfs'] = serverparams[4]
-    uri_node_query = parse_qs(uri_node.query)
+    try:
+        sample_nodeconf['server_port'] = serverparams[1]
+        sample_nodeconf['method'] = serverparams[3]
+        sample_nodeconf['password'] = decode_base64(serverparams[5].encode()).decode()
+        sample_nodeconf['protocol'] = serverparams[2]
+        sample_nodeconf['obfs'] = serverparams[4]
+        uri_node_query = parse_qs(uri_node.query)
+    except:
+        print("Error of parsing nodes, ignored. @ssraddr.py Line 92")
     try:
         sample_nodeconf['obfs_param'] = decode_base64(uri_node_query['obfsparam'][0].encode()).decode()
     except KeyError:
