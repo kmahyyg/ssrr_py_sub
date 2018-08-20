@@ -83,7 +83,11 @@ def ssr2conf_b64(ssrurilist):
     uri_node = urlsplit(uriparams_b64)
     sample_nodeconf['server_port'] = serverparams[1]
     sample_nodeconf['method'] = serverparams[3]
-    sample_nodeconf['password'] = decode_base64(serverparams[5].encode()).decode()
+    try:
+        sample_nodeconf['password'] = decode_base64(serverparams[5].encode()).decode()
+    except UnicodeDecodeError as e:
+        print("Error" + str(e) + "May caused by using NimaQu's SSPanel Node Remark lefting feature. Ignored this node.")
+        sample_nodeconf['password'] = "123456"
     sample_nodeconf['protocol'] = serverparams[2]
     sample_nodeconf['obfs'] = serverparams[4]
     uri_node_query = parse_qs(uri_node.query)
