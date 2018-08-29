@@ -19,6 +19,7 @@
 
 from ping3 import ping
 from socket import gethostbyname as dnslookup
+from socket import gaierror
 import requests
 from time import sleep
 import asyncio
@@ -47,10 +48,13 @@ def serverloca(servername):
 def pcchoose(serverlst,serverremarklst):
     loop = asyncio.get_event_loop()
     tasklist = []
-    for i in serverlst:
-        tsk = asyncio.ensure_future(ping(i))
-        tasklist.append(tsk)
-    loop.run_until_complete(asyncio.gather(*tasklist))
+    try:
+        for i in serverlst:
+            tsk = asyncio.ensure_future(ping(i))
+            tasklist.append(tsk)
+        loop.run_until_complete(asyncio.gather(*tasklist))
+    except gaierror as e:
+        pass
     for i in tasklist:
         rtt = i.result()
         if isinstance(rtt, float):
